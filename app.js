@@ -16,6 +16,16 @@ var request = require('request');
 // for more info, see: https://www.npmjs.com/package/cfenv
 var cfenv = require('cfenv');
 
+var is_recommend_rule = function(text) {
+  if (text.indexOf('おすすめ') !== -1) {
+      return true;
+  }
+  if (text.indexOf('お勧め') !== -1) {
+      return true;
+  }
+  return false;
+}
+
 // create a new express server
 var app = express();
 
@@ -28,6 +38,10 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.post('/api', function(req, res) {
+  var text = req.body.events[0].message.text;
+  if (is_recommend_rule(text)) {
+  	text = 'おすすめはありません。';
+  }
   var options = {
     method: 'POST',
     uri: 'https://api.line.me/v2/bot/message/reply',
@@ -35,7 +49,7 @@ app.post('/api', function(req, res) {
       replyToken: req.body.events[0].replyToken,
       messages: [{
         type: "text",
-        text: req.body.events[0].message.text
+        text: text
       }]
     },
     auth: {
