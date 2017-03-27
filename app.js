@@ -60,7 +60,7 @@ app.post('/api', function(req, res) {
                   {
                     type: "uri",
                     label: "アプリを起動",
-                    uri: ""
+                    uri: "http://www.yahoo.co.jp/"
                   }
                 ]
               }
