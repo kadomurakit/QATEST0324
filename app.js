@@ -86,6 +86,11 @@ app.post('/api', function(req, res) {
         messages: [{
           type: "text",
           text: text
+        },
+        {
+        	type: "image",
+        	originalContentUrl: "http://imgc.nxtv.jp/img/info/tit/00004/SID0004254.png",
+        	previewImageUrl: "http://imgc.nxtv.jp/img/info/tit/00004/SID0004254.png"
         }]
       },
       auth: {
