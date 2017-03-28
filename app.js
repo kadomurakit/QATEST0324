@@ -20,6 +20,7 @@ var cfenv = require('cfenv');
 var app = express();
 
 var rule = require('./rule');
+var lineutil = require('./lineutil');
 
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
@@ -70,29 +71,7 @@ app.post('/api', function(req, res) {
     });
   }
   else {
-    options = {
-      method: 'POST',
-      uri: 'https://api.line.me/v2/bot/message/reply',
-      body: {
-        replyToken: req.body.events[0].replyToken,
-        messages: [{
-          type: "text",
-          text: text
-        },
-        {
-        	type: "image",
-        	originalContentUrl: "https://imgc.nxtv.jp/img/info/tit/00004/SID0004254.png",
-        	previewImageUrl: "https://imgc.nxtv.jp/img/info/tit/00004/SID0004254.png"
-        }]
-      },
-      auth: {
-        bearer: 'SqHs6RnPOfkmIhGAz7O7vbUKemOqzcJ1XQAcea7aWmMiJIZC6aOswHTepCmRlnMUFVoR/Xo3ebfLOwpIWlQpxqZbquf5HZms+pEjLnhJ/IXZNkrwdxKdg0WajmWu2X4CS4+48Z2wTMAM7I0Md9ViZAdB04t89/1O/w1cDnyilFU='
-      },
-      json: true
-    };
-    request(options, function(err, res, body) {
-      console.log(JSON.stringify(res));
-    });
+  	lineutil.send_text(req.body.events[0].replyToken, text);
   }
 });
 
