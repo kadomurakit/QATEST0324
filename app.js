@@ -53,7 +53,7 @@ app.post('/api', function(req, res) {
             type: "carousel",
             "columns": [
               {
-                thumbnailImageUrl: "http://imgc.nxtv.jp/img/info/tit/00004/SID0004254.png",
+                thumbnailImageUrl: "https://imgc.nxtv.jp/img/info/tit/00004/SID0004254.png",
                 title: "闇金ウシジマくん Part２",
                 text: "もはや怪優の域!?山田孝之が冷酷非情な闇金屋を演じる人気シリーズの劇場版第2弾",
                 actions: [
