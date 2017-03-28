@@ -16,18 +16,10 @@ var request = require('request');
 // for more info, see: https://www.npmjs.com/package/cfenv
 var cfenv = require('cfenv');
 
-var is_recommend_rule = function(text) {
-  if (text.indexOf('おすすめ') !== -1) {
-      return true;
-  }
-  if (text.indexOf('お勧め') !== -1) {
-      return true;
-  }
-  return false;
-};
-
 // create a new express server
 var app = express();
+
+var rule = require('./rule');
 
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
@@ -40,7 +32,7 @@ app.use(bodyParser.json());
 app.post('/api', function(req, res) {
   var text = req.body.events[0].message.text;
   var options = null;
-  if (is_recommend_rule(text)) {
+  if (rule.is_recommend_rule(text)) {
   	options = {
       method: 'POST',
       uri: 'https://api.line.me/v2/bot/message/reply',
