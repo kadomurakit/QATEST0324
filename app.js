@@ -21,6 +21,7 @@ var app = express();
 
 var rule = require('./rule');
 var lineutil = require('./lineutil');
+var docomoutil = require('./docomoutil');
 
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
@@ -71,6 +72,7 @@ app.post('/api', function(req, res) {
     });
   }
   else {
+  	text = docomoutil.get_reply(req.body.events[0].message.text);
   	lineutil.send_text(req.body.events[0].replyToken, text);
   }
 });
