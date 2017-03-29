@@ -22,12 +22,12 @@ lineutil.send_text = function(token, text) {
     });
 };
 
-lineutil.send_carousel = function(token, text) {
+lineutil.send_carousel = function(token) {
 	var options = {
       method: 'POST',
       uri: 'https://api.line.me/v2/bot/message/reply',
       body: {
-        replyToken: req.body.events[0].replyToken,
+        replyToken: token,
         messages: [{
           type: "template",
           altText: "おすすめの映画",

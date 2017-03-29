@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.post('/api', function(req, res) {
   var text = req.body.events[0].message.text;
   if (rule.is_recommend_rule(text)) {
-    lineutil.send_carousel(req.body.events[0].replyToken, text);
+    lineutil.send_carousel(req.body.events[0].replyToken);
   }
   else {
   	text = docomoutil.get_reply(req.body.events[0].message.text);
